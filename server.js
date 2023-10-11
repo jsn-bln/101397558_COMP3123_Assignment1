@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
+const empRoutes = require('./routes/empRoutes');
 
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ db.once('open', () => {
 
 
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/emp', empRoutes);
 
 
 app.listen(PORT, () => console.log(`Listening on PORT:${PORT}`))

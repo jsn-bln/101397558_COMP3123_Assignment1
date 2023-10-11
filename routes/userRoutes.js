@@ -14,31 +14,34 @@ router.post('/signup', (req, res) => {
     if(mongoose.connection.readyState !== 1){
         res.status(201).json({"message" : "user created but not saved into the database"})
     }
-
-    // IF CONNECTED TO  MONGODB
-    // Check whether password field is empty and hash it before
-    // passing it into User
-    if(password.length > 0){
-        bcrypt.hash(password, 10, (err, hash) => {
-            if(err) return;
-            const newUser = new User({
-                username,
-                email,
-                password: hash
-            })
-
-            newUser
-                .save()
-                .then(() => {
-                    console.log('User saved to the database');
-                    res.status(201).json({ message: 'User registered successfully' });
+    else{
+        // IF CONNECTED TO  MONGODB
+        // Check whether password field is empty and hash it before
+        // passing it into User
+        if(password.length > 0){
+            bcrypt.hash(password, 10, (err, hash) => {
+                if(err) return;
+                const newUser = new User({
+                    username,
+                    email,
+                    password: hash
                 })
-                .catch((error) => {
-                    console.error('Error saving user:', error);
-                    res.status(500).json({ error: 'User registration failed' });
-                });  
-        })
+
+                newUser
+                    .save()
+                    .then(() => {
+                        console.log('User saved to the database');
+                        res.status(201).json({ message: 'User registered successfully' });
+                    })
+                    .catch((error) => {
+                        console.error('Error saving user:', error);
+                        res.status(500).json({ error: 'User registration failed' });
+                    });  
+            })
+        }
     }
+
+    
 })
 
 // ENDPOINT 2 (LOGIN)
@@ -88,6 +91,9 @@ router.post('/login', (req ,res) => {
         })
 
 })
+
+
+
 
 
 
