@@ -1,5 +1,10 @@
 # COMP 3123 - ASSIGNMENT 1
 
+**LIVE SITE**
+```
+ https://thankful-cardigan-hare.cyclic.cloud 
+```
+
 ## ENDPOINTS
 
 *Sign up*
@@ -56,3 +61,4 @@ http://localhost:8080/api/v1/emp/employees?eid=xxx
     password : admin,
     email : admin@admin.com
 ```
+
